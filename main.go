@@ -1,8 +1,7 @@
 package main
 
 import (
-    "github.com/spf13/cobra/cobra/cmd"
-    "ucb-cmd"
+    "github.com/saltatory/go-ucb-cli/cmd"
 )
 
 func main() {
