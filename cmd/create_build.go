@@ -2,7 +2,6 @@ package cmd
 
 import (
     "context"
-    "encoding/json"
     "fmt"
     "github.com/spf13/cobra"
     "os"
@@ -10,6 +9,8 @@ import (
 
 func init() {
     CreateCommand.AddCommand(CreateBuildCommand)
+    CreateBuildCommand.Flags().StringVarP(&TargetId,"target","t","","Build Target Id (required)")
+    CreateBuildCommand.MarkFlagRequired("target")
 }
 
 var ctx = context.TODO()
@@ -21,14 +22,16 @@ var CreateBuildCommand = &cobra.Command{
     Run: func(cmd *cobra.Command, args []string) {
         var builds = Client.BuildsApi
 
-        b, _, err := builds.StartBuilds(ctx, OrgId, ProjectId, "TODO", nil)
+        b, _, err := builds.StartBuilds(ctx, OrgId, ProjectId, TargetId, nil)
 
         if (err != nil) {
             fmt.Println(err)
             os.Exit(1)
         }
 
-        fmt.Println(json.Marshal(b))
+        for _,v := range b {
+            fmt.Println(v.Build)
+        }
 
     },
 }

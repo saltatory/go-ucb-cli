@@ -12,8 +12,8 @@ func init() {
 
 var ListBuildCommand = &cobra.Command{
     Use:     "build",
-    Short:   "List builds",
-    Long:    "List builds",
+    Short:   "List builds for a build target",
+    Long:    "List builds for a build target",
     Aliases: []string{"builds"},
     Args:    cobra.ExactArgs(1),
     Run: func(cmd *cobra.Command, args []string) {
